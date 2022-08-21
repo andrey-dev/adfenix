@@ -1,0 +1,54 @@
+<form [formGroup]="payrollForm" (ngSubmit)="onSubmit()">
+  <div class="payroll-settings">
+    <div>
+      <!-- Experience -->
+      <label for="experience">Years of experience:</label>
+      <mat-button-toggle-group
+        id="experience"
+        formControlName="experience"
+        aria-label="Years of experience"
+      >
+        <mat-button-toggle [value]="years" *ngFor="let years of yearsOfExperience">{{
+          years
+        }}</mat-button-toggle>
+      </mat-button-toggle-group>
+
+      <!-- Profession -->
+      <label id="profession-label">Profession:</label>
+      <mat-radio-group
+        aria-labelledby="profession-label"
+        class="profession-radio-group"
+        formControlName="profession"
+      >
+        <mat-radio-button
+          class="profession-radio-button"
+          *ngFor="let profession of professions"
+          [value]="profession"
+        >
+          {{ profession }}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div>
+      <!-- City -->
+      <label id="city-label">City:</label>
+      <mat-form-field appearance="fill" aria-labelledby="city-label">
+        <mat-select formControlName="city">
+          <mat-option [value]="city" *ngFor="let city of cities">{{ city }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Year -->
+      <label id="year-label">Year:</label>
+      <mat-form-field appearance="fill" aria-labelledby="year-label">
+        <mat-select formControlName="year">
+          <mat-option [value]="year" *ngFor="let year of years">{{ year }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <button mat-flat-button color="primary">Calculate salary</button>
+</form>
+<hr />

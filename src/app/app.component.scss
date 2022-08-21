@@ -1,0 +1,19 @@
+:host {
+  background: #fafafa;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  padding-top: 15px;
+}
+
+.calculator {
+  border: 1px solid rgba(25, 118, 210, 0.2);
+  border-radius: 5px;
+  border-width: 15px;
+  padding: 0 15px 15px 15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
