@@ -37,6 +37,7 @@
         <mat-select formControlName="city">
           <mat-option [value]="city" *ngFor="let city of cities">{{ city }}</mat-option>
         </mat-select>
+        <mat-error *ngIf="city.hasError('required')">Please select a city</mat-error>
       </mat-form-field>
 
       <!-- Year -->
@@ -45,6 +46,7 @@
         <mat-select formControlName="year">
           <mat-option [value]="year" *ngFor="let year of years">{{ year }}</mat-option>
         </mat-select>
+        <mat-error *ngIf="year.hasError('required')">Please select a year</mat-error>
       </mat-form-field>
     </div>
   </div>

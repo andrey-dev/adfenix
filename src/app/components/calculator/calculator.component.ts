@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PROFESSION, CITY, YEARS_OF_EXPERIENCE } from 'src/app/constants';
 
 @Component({
@@ -17,10 +17,22 @@ export class CalculatorComponent {
   public payrollForm = new FormGroup({
     experience: new FormControl(YEARS_OF_EXPERIENCE.ZeroToThree),
     profession: new FormControl(PROFESSION.Developer),
-    city: new FormControl(CITY.Stockholm),
-    year: new FormControl(''),
+    city: new FormControl('', Validators.required),
+    year: new FormControl('', Validators.required),
   });
   constructor() {}
 
-  public onSubmit(): void {}
+  public get city(): FormControl {
+    return this.payrollForm.get('city') as FormControl;
+  }
+
+  public get year(): FormControl {
+    return this.payrollForm.get('year') as FormControl;
+  }
+
+  public onSubmit(): void {
+    if (this.payrollForm.invalid) {
+      return;
+    }
+  }
 }
