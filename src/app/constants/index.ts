@@ -1,9 +1,13 @@
-export enum EXPERIENCE_TO_SALARY_INCREASE {
-  '0-3' = 0,
-  '4-7' = 20,
-  '8-10' = 40,
-  '11+' = 60,
-}
+// export enum EXPERIENCE_TO_SALARY_INCREASE {
+//   '0-3' = 0,
+//   '4-7' = 20,
+//   '8-10' = 40,
+//   '11+' = 60,
+// }
+export const YEARS = {
+  2019: '2019',
+  2020: '2020',
+};
 
 export enum YEARS_OF_EXPERIENCE {
   ZeroToThree = '0-3',
