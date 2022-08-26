@@ -15,7 +15,7 @@ export const SALARY_INCREASE = {
 
 // The basic tax rate is based on city and income year
 // applied to salary between SEK 0 - 36,000
-export const BASIC_TAX_RATE = {
+export const BASIC_TAX_RATE: { [key: string]: { [key: string]: number } } = {
   [CITY.Gothenburg]: {
     [YEARS[2019]]: 0.25,
     [YEARS[2020]]: 0.22,
@@ -25,3 +25,9 @@ export const BASIC_TAX_RATE = {
     [YEARS[2020]]: 0.29,
   },
 };
+
+export const MIDDLE_TAX_RATE = 0.5;
+export const UPPER_TAX_RATE = 0.7;
+
+export const MIDDLE_TAX_RATE_BOUNDARY = 36000;
+export const UPPER_TAX_RATE_BOUNDARY = 45000;

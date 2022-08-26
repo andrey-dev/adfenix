@@ -6,3 +6,15 @@ export interface CalculatorData {
   city: string;
   year: string;
 }
+
+export interface SplittedSalary {
+  amount: number;
+  tax: number;
+}
+
+export interface CalculatedSalary {
+  monthlyGross: number;
+  monthlyNet: number;
+  yearlyGross: number;
+  yearlyNet: number;
+}

@@ -1,11 +1,21 @@
-<div>
-  <h3>Gross</h3>
-  <p>Annual income: 0000$</p>
-  <p>Monthly income: 0000$</p>
-</div>
+<ng-container *ngIf="calculatedSalary$ | async; let salary">
+  <div>
+    <h3>Gross</h3>
+    <p>
+      Annual income: <b>{{ salary.yearlyGross | currency: 'SEK':'' }} SEK</b>
+    </p>
+    <p>
+      Monthly income: <b>{{ salary.monthlyGross | currency: 'SEK':'' }} SEK</b>
+    </p>
+  </div>
 
-<div>
-  <h3>Net</h3>
-  <p>Annual income: 0000$</p>
-  <p>Annual income: 0000$</p>
-</div>
+  <div>
+    <h3>Net</h3>
+    <p>
+      Annual income: <b>{{ salary.yearlyNet | currency: 'SEK':'' }} SEK</b>
+    </p>
+    <p>
+      Monthly income: <b>{{ salary.monthlyNet | currency: 'SEK':'' }} SEK</b>
+    </p>
+  </div>
+</ng-container>
