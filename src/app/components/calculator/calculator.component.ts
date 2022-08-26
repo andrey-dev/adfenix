@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PROFESSION, CITY, YEARS_OF_EXPERIENCE } from 'src/app/constants';
+import { CalculatorService, CalculatorData } from 'src/app/services';
 
 @Component({
   selector: 'calc-calculator',
@@ -20,7 +21,8 @@ export class CalculatorComponent {
     city: new FormControl('', Validators.required),
     year: new FormControl('', Validators.required),
   });
-  constructor() {}
+
+  constructor(private calcService: CalculatorService) {}
 
   public get city(): FormControl {
     return this.payrollForm.get('city') as FormControl;
@@ -34,5 +36,6 @@ export class CalculatorComponent {
     if (this.payrollForm.invalid) {
       return;
     }
+    this.calcService.calculateSalary(this.payrollForm.value as CalculatorData);
   }
 }

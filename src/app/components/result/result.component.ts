@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { CalculatorService, CalculatedSalary } from 'src/app/services';
 
 @Component({
   selector: 'calc-result',
@@ -7,7 +9,11 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResultComponent implements OnInit {
-  constructor() {}
+  public calculatedSalary$: Observable<CalculatedSalary> | undefined;
 
-  ngOnInit(): void {}
+  constructor(private calcService: CalculatorService) {}
+
+  ngOnInit(): void {
+    this.calculatedSalary$ = this.calcService.calculatedSalary;
+  }
 }
