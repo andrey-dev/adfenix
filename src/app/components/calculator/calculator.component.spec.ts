@@ -14,7 +14,7 @@ describe('CalculatorComponent', () => {
   let component: CalculatorComponent;
   let fixture: ComponentFixture<CalculatorComponent>;
 
-  let calcServiceSpy = jasmine.createSpyObj<CalculatorService>(['calculateSalary']);
+  const calcServiceSpy = jasmine.createSpyObj<CalculatorService>(['calculateSalary']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

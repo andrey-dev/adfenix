@@ -17,11 +17,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class CalculatorService {
   private readonly monthsInYear = 12;
-  private readonly calculatedSalarySubj = new BehaviorSubject<CalculatedSalary>(
-    INIT_SALARY
-  );
-
-  constructor() {}
+  private readonly calculatedSalarySubj = new BehaviorSubject<CalculatedSalary>(INIT_SALARY);
 
   public getCalculatedSalary(): Observable<CalculatedSalary> {
     return this.calculatedSalarySubj.asObservable();
@@ -31,10 +27,7 @@ export class CalculatorService {
     const salaryBeforeTax = this.getSalaryBeforeTax(calcData);
     const basicTaxRate = BASIC_TAX_RATE[calcData.city][calcData.year];
 
-    const splittedSalary: SplittedSalary[] = this.getSplittedSalary(
-      salaryBeforeTax,
-      basicTaxRate
-    );
+    const splittedSalary: SplittedSalary[] = this.getSplittedSalary(salaryBeforeTax, basicTaxRate);
     const salaryAfterTax = splittedSalary.reduce((prev, curr) => {
       return prev + (curr.amount - curr.amount * curr.tax);
     }, 0);
@@ -59,10 +52,7 @@ export class CalculatorService {
   }
 
   // Split salary by tax rates
-  private getSplittedSalary(
-    salaryBeforeTax: number,
-    basicTaxRate: number
-  ): SplittedSalary[] {
+  private getSplittedSalary(salaryBeforeTax: number, basicTaxRate: number): SplittedSalary[] {
     const splittedSalary: SplittedSalary[] = [];
 
     // Get salary and tax before 36000 SEK (MIDDLE_TAX_RATE_BOUNDARY)
