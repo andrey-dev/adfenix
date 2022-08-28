@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { BrowserModule } from '@angular/platform-browser';
@@ -13,6 +14,7 @@ import { HeaderComponent, CalculatorComponent, ResultComponent } from './compone
 @NgModule({
   declarations: [AppComponent, HeaderComponent, CalculatorComponent, ResultComponent],
   imports: [
+    CommonModule,
     BrowserModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

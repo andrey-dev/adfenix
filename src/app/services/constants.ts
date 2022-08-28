@@ -1,4 +1,5 @@
 import { PROFESSION, YEARS_OF_EXPERIENCE, CITY, YEARS } from '../constants';
+import { CalculatedSalary } from './types';
 
 export const BASIC_SALARY = {
   [PROFESSION.Developer]: 30000,
@@ -31,3 +32,10 @@ export const UPPER_TAX_RATE = 0.7;
 
 export const MIDDLE_TAX_RATE_BOUNDARY = 36000;
 export const UPPER_TAX_RATE_BOUNDARY = 45000;
+
+export const INIT_SALARY: CalculatedSalary = {
+  monthlyGross: 0,
+  monthlyNet: 0,
+  yearlyGross: 0,
+  yearlyNet: 0,
+};

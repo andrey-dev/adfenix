@@ -1,6 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { PROFESSION, CITY, YEARS_OF_EXPERIENCE } from 'src/app/constants';
+import {
+  PROFESSION,
+  CITY,
+  YEARS,
+  YEARS_OF_EXPERIENCE,
+} from 'src/app/constants';
 import { CalculatorService, CalculatorData } from 'src/app/services';
 
 @Component({
@@ -13,7 +18,7 @@ export class CalculatorComponent {
   public yearsOfExperience = Object.values(YEARS_OF_EXPERIENCE);
   public professions = Object.values(PROFESSION);
   public cities = Object.values(CITY);
-  public years = [2019, 2020];
+  public years = Object.values(YEARS);
 
   public payrollForm = new FormGroup({
     experience: new FormControl(YEARS_OF_EXPERIENCE.ZeroToThree),

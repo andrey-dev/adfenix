@@ -1,10 +1,12 @@
-import { PROFESSION, YEARS_OF_EXPERIENCE } from '../constants';
+import { CITY, PROFESSION, YEARS_OF_EXPERIENCE, YEARS } from '../constants';
+
+type YearKeys = keyof typeof YEARS;
 
 export interface CalculatorData {
   experience: YEARS_OF_EXPERIENCE;
   profession: PROFESSION;
-  city: string;
-  year: string;
+  city: CITY;
+  year: typeof YEARS[YearKeys];
 }
 
 export interface SplittedSalary {
