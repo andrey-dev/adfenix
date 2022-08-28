@@ -21,11 +21,7 @@ describe('HeaderComponent', () => {
   });
 
   it('should render title', () => {
-    const fixture = TestBed.createComponent(HeaderComponent);
-    fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain(
-      'Adfenix payroll calculator'
-    );
+    expect(compiled.querySelector('h1')?.textContent).toContain('Adfenix payroll calculator');
   });
 });

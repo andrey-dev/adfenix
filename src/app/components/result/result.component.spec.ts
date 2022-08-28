@@ -1,10 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import {
-  CalculatedSalary,
-  CalculatorService,
-  INIT_SALARY,
-} from 'src/app/services';
+import { CalculatedSalary, CalculatorService, INIT_SALARY } from 'src/app/services';
 
 import { ResultComponent } from './result.component';
 
@@ -18,9 +14,7 @@ describe('ResultComponent', () => {
     yearlyGross: 500000,
     yearlyNet: 300000,
   };
-  const calcServiceSpy = jasmine.createSpyObj<CalculatorService>([
-    'getCalculatedSalary',
-  ]);
+  const calcServiceSpy = jasmine.createSpyObj<CalculatorService>(['getCalculatedSalary']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -42,18 +36,18 @@ describe('ResultComponent', () => {
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(
-      compiled.querySelector('.gross-annual-income')?.textContent
-    ).toContain('Annual income: 0.00 SEK');
-    expect(
-      compiled.querySelector('.gross-monthly-income')?.textContent
-    ).toContain('Monthly income: 0.00 SEK');
-    expect(compiled.querySelector('.net-annual-income')?.textContent).toContain(
-      'Annual income: 0.00 SEK'
+    expect(compiled.querySelector('.gross-annual-income')?.textContent).toContain(
+      'Annual income: 0.00 SEK',
     );
-    expect(
-      compiled.querySelector('.net-monthly-income')?.textContent
-    ).toContain('Monthly income: 0.00 SEK');
+    expect(compiled.querySelector('.gross-monthly-income')?.textContent).toContain(
+      'Monthly income: 0.00 SEK',
+    );
+    expect(compiled.querySelector('.net-annual-income')?.textContent).toContain(
+      'Annual income: 0.00 SEK',
+    );
+    expect(compiled.querySelector('.net-monthly-income')?.textContent).toContain(
+      'Monthly income: 0.00 SEK',
+    );
   });
 
   it('should render salary after calculation', () => {
@@ -62,17 +56,17 @@ describe('ResultComponent', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(
-      compiled.querySelector('.gross-annual-income')?.textContent
-    ).toContain(`Annual income: 500,000.00 SEK`);
-    expect(
-      compiled.querySelector('.gross-monthly-income')?.textContent
-    ).toContain(`Monthly income: 20,000.00 SEK`);
-    expect(compiled.querySelector('.net-annual-income')?.textContent).toContain(
-      `Annual income: 300,000.00 SEK`
+    expect(compiled.querySelector('.gross-annual-income')?.textContent).toContain(
+      `Annual income: 500,000.00 SEK`,
     );
-    expect(
-      compiled.querySelector('.net-monthly-income')?.textContent
-    ).toContain(`Monthly income: 15,000.00 SEK`);
+    expect(compiled.querySelector('.gross-monthly-income')?.textContent).toContain(
+      `Monthly income: 20,000.00 SEK`,
+    );
+    expect(compiled.querySelector('.net-annual-income')?.textContent).toContain(
+      `Annual income: 300,000.00 SEK`,
+    );
+    expect(compiled.querySelector('.net-monthly-income')?.textContent).toContain(
+      `Monthly income: 15,000.00 SEK`,
+    );
   });
 });

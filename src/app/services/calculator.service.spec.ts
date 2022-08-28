@@ -1,16 +1,28 @@
+import { TestBed, inject } from '@angular/core/testing';
 import { CalculatorService } from './calculator.service';
 
 describe('CalculatorService', () => {
-  let service: CalculatorService;
   beforeEach(() => {
-    service = new CalculatorService();
+    TestBed.configureTestingModule({
+      providers: [CalculatorService],
+    });
   });
 
-  it('getCalculatedSalary() method should be presented', () => {
-    expect(service.getCalculatedSalary).toBeTruthy();
-  });
+  it('should be created', inject([CalculatorService], (service: CalculatorService) => {
+    expect(service).toBeTruthy();
+  }));
 
-  it('calculateSalary() method should be presented', () => {
-    expect(service.calculateSalary).toBeTruthy();
-  });
+  it('getCalculatedSalary() method should be presented', inject(
+    [CalculatorService],
+    (service: CalculatorService) => {
+      expect(service.getCalculatedSalary).toBeTruthy();
+    },
+  ));
+
+  it('calculateSalary() method should be presented', inject(
+    [CalculatorService],
+    (service: CalculatorService) => {
+      expect(service.calculateSalary).toBeTruthy();
+    },
+  ));
 });
