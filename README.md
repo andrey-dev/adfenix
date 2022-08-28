@@ -1,8 +1,11 @@
 # Adfenix
 
-npm start - run project (open your browser on http://localhost:4200/ )
+npm start - run project (open your browser on http://localhost:4200/)
+
 npm test - run tests
+
 npm run lint - run linter
+
 npm run build - build the project
 
 ## Development server
