@@ -14,6 +14,6 @@ export class ResultComponent implements OnInit {
   constructor(private calcService: CalculatorService) {}
 
   ngOnInit(): void {
-    this.calculatedSalary$ = this.calcService.calculatedSalary;
+    this.calculatedSalary$ = this.calcService.getCalculatedSalary();
   }
 }

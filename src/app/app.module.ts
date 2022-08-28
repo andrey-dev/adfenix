@@ -8,10 +8,19 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent, CalculatorComponent, ResultComponent } from './components';
+import {
+  HeaderComponent,
+  CalculatorComponent,
+  ResultComponent,
+} from './components';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, CalculatorComponent, ResultComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    CalculatorComponent,
+    ResultComponent,
+  ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,

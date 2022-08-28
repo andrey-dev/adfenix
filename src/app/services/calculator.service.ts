@@ -8,6 +8,7 @@ import {
   UPPER_TAX_RATE,
   MIDDLE_TAX_RATE_BOUNDARY,
   UPPER_TAX_RATE_BOUNDARY,
+  INIT_SALARY,
 } from './constants';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -15,28 +16,25 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CalculatorService {
-  private initSalary: CalculatedSalary = {
-    monthlyGross: 0,
-    monthlyNet: 0,
-    yearlyGross: 0,
-    yearlyNet: 0,
-  };
-  private readonly calculatedSalarySubj = new BehaviorSubject<CalculatedSalary>(this.initSalary);
-
-  public get calculatedSalary(): Observable<CalculatedSalary> {
-    return this.calculatedSalarySubj.asObservable();
-  }
+  private readonly monthsInYear = 12;
+  private readonly calculatedSalarySubj = new BehaviorSubject<CalculatedSalary>(
+    INIT_SALARY
+  );
 
   constructor() {}
 
-  public calculateSalary(data: CalculatorData): void {
-    // get base salary + increase part
-    const salaryBeforeTax =
-      BASIC_SALARY[data.profession] +
-      BASIC_SALARY[data.profession] * SALARY_INCREASE[data.experience];
-    const basicTaxRate = BASIC_TAX_RATE[data.city][data.year];
+  public getCalculatedSalary(): Observable<CalculatedSalary> {
+    return this.calculatedSalarySubj.asObservable();
+  }
 
-    const splittedSalary: SplittedSalary[] = this.getSplittedSalary(salaryBeforeTax, basicTaxRate);
+  public calculateSalary(calcData: CalculatorData): void {
+    const salaryBeforeTax = this.getSalaryBeforeTax(calcData);
+    const basicTaxRate = BASIC_TAX_RATE[calcData.city][calcData.year];
+
+    const splittedSalary: SplittedSalary[] = this.getSplittedSalary(
+      salaryBeforeTax,
+      basicTaxRate
+    );
     const salaryAfterTax = splittedSalary.reduce((prev, curr) => {
       return prev + (curr.amount - curr.amount * curr.tax);
     }, 0);
@@ -44,22 +42,41 @@ export class CalculatorService {
     this.calculatedSalarySubj.next({
       monthlyGross: salaryBeforeTax,
       monthlyNet: salaryAfterTax,
-      yearlyGross: salaryBeforeTax * 12,
-      yearlyNet: salaryAfterTax * 12,
+      yearlyGross: salaryBeforeTax * this.monthsInYear,
+      yearlyNet: salaryAfterTax * this.monthsInYear,
     });
   }
 
+  private getSalaryBeforeTax(calcData: CalculatorData): number {
+    if (!calcData) {
+      return 0;
+    }
+
+    return (
+      BASIC_SALARY[calcData.profession] +
+      BASIC_SALARY[calcData.profession] * SALARY_INCREASE[calcData.experience]
+    );
+  }
+
   // Split salary by tax rates
-  private getSplittedSalary(salaryBeforeTax: number, basicTaxRate: number): SplittedSalary[] {
+  private getSplittedSalary(
+    salaryBeforeTax: number,
+    basicTaxRate: number
+  ): SplittedSalary[] {
     const splittedSalary: SplittedSalary[] = [];
 
+    // Get salary and tax before 36000 SEK (MIDDLE_TAX_RATE_BOUNDARY)
     if (salaryBeforeTax - MIDDLE_TAX_RATE_BOUNDARY > 0) {
-      splittedSalary.push({ amount: MIDDLE_TAX_RATE_BOUNDARY, tax: basicTaxRate });
+      splittedSalary.push({
+        amount: MIDDLE_TAX_RATE_BOUNDARY,
+        tax: basicTaxRate,
+      });
     } else {
       splittedSalary.push({ amount: salaryBeforeTax, tax: basicTaxRate });
       return splittedSalary;
     }
 
+    // Get salary and tax before 45000 SEK (UPPER_TAX_RATE_BOUNDARY)
     if (salaryBeforeTax - UPPER_TAX_RATE_BOUNDARY > 0) {
       splittedSalary.push({
         amount: UPPER_TAX_RATE_BOUNDARY - MIDDLE_TAX_RATE_BOUNDARY,
@@ -73,7 +90,11 @@ export class CalculatorService {
       return splittedSalary;
     }
 
-    splittedSalary.push({ amount: salaryBeforeTax - UPPER_TAX_RATE_BOUNDARY, tax: UPPER_TAX_RATE });
+    // Get salary and tax after 45000 SEK (UPPER_TAX_RATE_BOUNDARY)
+    splittedSalary.push({
+      amount: salaryBeforeTax - UPPER_TAX_RATE_BOUNDARY,
+      tax: UPPER_TAX_RATE,
+    });
 
     return splittedSalary;
   }
